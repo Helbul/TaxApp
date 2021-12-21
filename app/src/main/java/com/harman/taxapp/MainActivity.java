@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.SharedPreferences;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,10 +33,21 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference users;
     ConstraintLayout helloActivity;
 
+    SharedPreferences settings;
+
+    private static final String PREF_FILE = "SettingsAccount";
+    private static final String PREF_NAME = "Name";
+    private static final String PREF_EMAIL = "Email";
+    private static final String PREF_BASE_ID = "BaseId";
+    private static final String PREF_ACCOUNT = "Account";
+    private static final String PREF_ALL_ACCOUNTS = "AllAccounts";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settings = getSharedPreferences(PREF_FILE, MODE_PRIVATE);
 
         buttonSignIn = findViewById(R.id.buttonSignIn);
         buttonRegister = findViewById(R.id.buttonRegister);
@@ -97,15 +109,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //авторизация пользователя
-                auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                String emailString = email.getText().toString();
+                auth.signInWithEmailAndPassword(emailString, password.getText().toString())
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            startActivity(new Intent(MainActivity.this, StatementActivity.class));
-                            finish();
-                            //Snackbar.make(helloActivity, auth.getCurrentUser().getUid(), Snackbar.LENGTH_LONG).show();
-                            //TextView textView = findViewById(R.id.text_under_bottom);
-                            //textView.setText(auth.getCurrentUser().getUid());
+                            SharedPreferences.Editor preferenceEditor = settings.edit();
+                            //preferenceEditor.putString(PREF_NAME, users.child(id).child("name").); name сохраню в другой activity, чтобы не тратить ресурсы
+                            preferenceEditor.putString(PREF_EMAIL, emailString);
+                            preferenceEditor.putString(PREF_BASE_ID, auth.getCurrentUser().getUid());
+                            preferenceEditor.apply();
+
+                            //startActivity(new Intent(MainActivity.this, StatementActivity.class));
+                            //finish();
+
+
+                            Snackbar.make(helloActivity, auth.getCurrentUser().getUid(), Snackbar.LENGTH_LONG).show();
+                            TextView textView = findViewById(R.id.text_under_bottom);
+                            textView.setText(auth.getCurrentUser().getUid());
+
+                            showNewAccountCard();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -183,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                             }
+
                         });
             }
         });
@@ -190,34 +214,36 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /*private void showNewAccountCard (){
+    private void showNewAccountCard (){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Создание счета");
         dialog.setMessage("Введите идентификационный номер вашего счета:");
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View registerCard = inflater.inflate(R.layout.register_card, null);
-        dialog.setView(registerCard);
+        View newAccountCard = inflater.inflate(R.layout.new_account_card, null);
+        dialog.setView(newAccountCard);
 
-        EditText accountName = registerCard.findViewById(R.id.editAccountName);
+        EditText editTextAccountName = newAccountCard.findViewById(R.id.editAccountName);
 
         dialog.setPositiveButton("Создать", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-
-                if (TextUtils.isEmpty(accountName.getText().toString()) && !accountName.getText().toString().contains(" ")) {
+                String accountName = editTextAccountName.getText().toString();
+                if (TextUtils.isEmpty(accountName) && accountName.contains(" ")) {
                     Snackbar.make(helloActivity, "Введите имя счета (без пробелов)", Snackbar.LENGTH_SHORT).show();
                     //return;
                 } else {
+                    SharedPreferences.Editor preferenceEditor = settings.edit();
+                    preferenceEditor.putString(PREF_ACCOUNT, accountName);
+                    //preferenceEditor.putString(PREF_ALL_ACCOUNTS, ???);
+                    preferenceEditor.apply();
+                    //auth.
+                    startActivity(new Intent(MainActivity.this, StatementActivity.class)); //потом перенести в select account
+                    finish(); //потом перенсти в select account
 
-                //auth.
-
-
+                }
             }
         });
-
         dialog.show();
-
-
-    }*/
+    }
 }
