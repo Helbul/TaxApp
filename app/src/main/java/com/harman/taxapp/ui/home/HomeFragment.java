@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //binding.textHome.setText(allSettings);
         homeViewModel.setText(allSettings);
 
         return root;

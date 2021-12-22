@@ -23,6 +23,4 @@ public class HomeViewModel extends ViewModel {
     public void setText(String s) { //мой метод
         mText.setValue(s);
     }
-
-
 }

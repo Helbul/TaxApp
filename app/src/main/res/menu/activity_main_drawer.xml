@@ -16,5 +16,16 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
+
+        <item
+            android:id="@+id/nav_new_transaction"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_new_transaction" />
+
+        <item
+            android:id="@+id/nav_taxes"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_taxes" />
+
     </group>
 </menu>

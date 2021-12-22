@@ -22,4 +22,19 @@
         android:name="com.harman.taxapp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+
+    <fragment
+        android:id="@+id/nav_new_transaction"
+        android:name="com.harman.taxapp.NewTransactionFragment"
+        android:label="@string/menu_new_transaction"
+        tools:layout="@layout/fragment_new_transaction" />
+
+    <fragment
+        android:id="@+id/nav_taxes"
+        android:name="com.harman.taxapp.TaxesFragment"
+        android:label="@string/menu_taxes"
+        tools:layout="@layout/fragment_taxes" />
+
+
 </navigation>

@@ -1,4 +1,4 @@
-package com.harman.taxapp.datausers;
+package com.harman.taxapp.usersdata;
 
 import java.util.ArrayList;
 import java.util.List;
