@@ -1,23 +1,18 @@
 package com.harman.taxapp.usersdata;
 
 public class Transaction {
-    private String id, type, data, valuta;
-    private String sum, rateCentralBank, sumRub;
+    private String type, date, valuta;
+    private Double rateCentralBank;
+    private Double sum, sumRub;
 
-    public Transaction(String id, String type, String data, String valuta, String sum) {
-        this.id = id;
+    public Transaction() {
+    }
+
+    public Transaction(String type, String date, String valuta, Double sum) {
         this.type = type;
-        this.data = data;
+        this.date = date;
         this.valuta = valuta;
         this.sum = sum;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -28,12 +23,12 @@ public class Transaction {
         this.type = type;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String data) {
+        this.date = data;
     }
 
     public String getValuta() {
@@ -44,27 +39,27 @@ public class Transaction {
         this.valuta = valuta;
     }
 
-    public String getSum() {
+    public Double getSum() {
         return sum;
     }
 
-    public void setSum(String sum) {
+    public void setSum(Double sum) {
         this.sum = sum;
     }
 
-    public String getRateCentralBank() {
+    public Double getRateCentralBank() {
         return rateCentralBank;
     }
 
-    public void setRateCentralBank(String rateCentralBank) {
+    public void setRateCentralBank(Double rateCentralBank) {
         this.rateCentralBank = rateCentralBank;
     }
 
-    public String getSumRub() {
+    public Double getSumRub() {
         return sumRub;
     }
 
-    public void setSumRub(String sumRub) {
+    public void setSumRub(Double sumRub) {
         this.sumRub = sumRub;
     }
 }

@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaxApp">
         <activity
-            android:name=".StatementActivity"
+            android:name=".activities.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_statement"
             android:theme="@style/Theme.TaxApp.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

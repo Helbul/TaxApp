@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewTransactionFragment">
+    tools:context=".ui.newtransaction.NewTransactionFragment">
 
 
     <LinearLayout
@@ -18,27 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--
-        <EditText
-            android:id="@+id/editIdTransaction"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_type_transaction"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:entries="@array/type_transaction"
             android:fontFamily="@font/montserrat"
-            android:hint="Id"
-            android:inputType="textPersonName"
-            android:textSize="14sp" />
-        -->
-
-        <EditText
-            android:id="@+id/editTypeTransaction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/montserrat"
-            android:hint="Тип операции"
+            android:hint="Валюта"
             android:inputType="text"
-            android:textSize="14sp" />
+            android:minHeight="48dp"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editDateTransaction"
@@ -48,7 +38,7 @@
             android:fontFamily="@font/montserrat"
             android:hint="Дата транзакции"
             android:inputType="date"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editSum"
@@ -59,17 +49,32 @@
             android:fontFamily="@font/montserrat"
             android:hint="Сумма"
             android:inputType="number"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editValuta"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spinner_currencies"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
+            android:layout_marginBottom="15dp"
+            android:entries="@array/currencies"
             android:fontFamily="@font/montserrat"
             android:hint="Валюта"
             android:inputType="text"
-            android:textSize="14sp" />
+            android:minHeight="48dp"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button_new_transaction_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/buttonAdd" />
+
+        <Button
+            android:id="@+id/button_new_transacrion_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonCancel" />
 
 
     </LinearLayout>

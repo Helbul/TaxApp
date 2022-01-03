@@ -3,38 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/homeFragment">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/homeFragment"
         android:name="com.harman.taxapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.harman.taxapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.harman.taxapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-
-    <fragment
-        android:id="@+id/nav_new_transaction"
-        android:name="com.harman.taxapp.NewTransactionFragment"
+        android:id="@+id/newTransactionFragment"
+        android:name="com.harman.taxapp.ui.newtransaction.NewTransactionFragment"
         android:label="@string/menu_new_transaction"
-        tools:layout="@layout/fragment_new_transaction" />
+        tools:layout="@layout/fragment_new_transaction" >
+        <action
+            android:id="@+id/action_nav_new_transaction_to_nav_taxes"
+            app:destination="@id/taxesFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_taxes"
-        android:name="com.harman.taxapp.TaxesFragment"
+        android:id="@+id/taxesFragment"
+        android:name="com.harman.taxapp.ui.taxes.TaxesFragment"
         android:label="@string/menu_taxes"
-        tools:layout="@layout/fragment_taxes" />
+        tools:layout="@layout/fragment_taxes" >
+        <action
+            android:id="@+id/action_nav_taxes_to_nav_new_transaction"
+            app:destination="@id/newTransactionFragment" />
+        <action
+            android:id="@+id/action_taxesFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.harman.taxapp.ui.transactions.TransactionsFragment"
+        android:label="transactions_fragment"
+        tools:layout="@layout/transactions_fragment" >
+        <action
+            android:id="@+id/action_transactionsFragment_to_taxesFragment"
+            app:destination="@id/taxesFragment" />
+        <action
+            android:id="@+id/action_transactionsFragment_to_newTransactionFragment"
+            app:destination="@id/newTransactionFragment" />
+    </fragment>
 
 
 </navigation>

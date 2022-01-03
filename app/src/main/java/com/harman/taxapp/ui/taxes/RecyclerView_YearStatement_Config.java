@@ -1,7 +1,8 @@
-package com.harman.taxapp;
+package com.harman.taxapp.ui.taxes;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -9,11 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.harman.taxapp.R;
 import com.harman.taxapp.usersdata.YearStatement;
 
 import java.util.List;
 
-public class RecyclerView_Config {
+public class RecyclerView_YearStatement_Config {
     private Context mContext;
     private YearStatementAdapter mYearStatementAdapter;
 
@@ -35,11 +37,18 @@ public class RecyclerView_Config {
                     inflate(R.layout.year_statement_list_item, parent, false));
             mYear = (TextView) itemView.findViewById(R.id.textViewYear);
             mYearSum = (TextView) itemView.findViewById(R.id.textViewYearSum);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //добавить переход на список сдeлок текущего года
+                }
+            });
         }
 
         public void bind (YearStatement yearStatement, String key) {
-            mYear.setText(yearStatement.getYear());
-            mYearSum.setText((yearStatement.getSumTaxes()));
+            mYear.setText(String.valueOf(yearStatement.getYear()));
+            mYearSum.setText(String.valueOf(yearStatement.getSumTaxes()));
             this.key = key;
         }
     }

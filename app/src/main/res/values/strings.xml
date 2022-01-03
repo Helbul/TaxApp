@@ -1,15 +1,73 @@
 <resources>
     <string name="app_name">TaxApp</string>
     <string name="app_hello">Приветствует!</string>
-    <string name="app_under_bottom">Войдите в свою учетную запись</string>
+
+    <string name="default_account">DefaultAccount</string>
+
+
+    <string name="buttonCancel">Отменить</string>
+    <string name="buttonOpen">Открыть</string>
+    <string name="buttonCreate">Создать</string>
+    <string name="buttonAdd">Добавить</string>
+
+    <!--LoginFragment-->
     <string name="buttonSignIn">Войти</string>
     <string name="buttonRegister">Зарегистрироваться</string>
+    <string name="app_under_bottom">Войдите в свою учетную запись</string>
+
+    <!--SignInFragment-->
+    <string name="signInEmail">E-mail</string>
+    <string name="signInPassword">Пароль</string>
+    <string name="buttonSignInOk">Войти</string>
+    <string name="buttonSignInCancel">Отменить</string>
+    <string name="underBottomSignIn">Войдите в свою учетную запись</string>
+
+    <!--SelectAccountFragment-->
+    <string name="buttonSelectOpen">Открыть</string>
+    <string name="buttonSelectCreate">Создать</string>
+    <string name="underBottomSelect">Выберете существующий или создайте новый счет</string>
+
+
+    <!--RegisterFragment-->
+    <string name="hintRegisterName">Имя</string>
+    <string name="hintRegisterTel">Телефон</string>
+    <string name="hintRegisterEmail">E-mail</string>
+    <string name="hintRegisterPassword">Пароль</string>
+    <string name="buttonRegisterOk">Зарегистрироваться</string>
+    <string name="buttonRegisterCancel">Отменить</string>
+    <string name="underBottomRegister">Заполните все поля</string>
+
+
+    <!--NewAccountFragment-->
+    <string name="hintNewAccount">№ счета</string>
+    <string name="buttonNewAccountOk">Создать</string>
+    <string name="buttonNewAccountCancel">Отменить</string>
+    <string name="underBottomNewAccount">Введите имя счета</string>
+
+
+    <!--FirstAccountFragment-->
+    <string name="hintFirstAccount">№ счета</string>
+    <string name="buttonFirstAccountOk">Создать</string>
+    <string name="buttonFirstAccountCancel">Пропустить</string>
+    <string name="underBottomFirstAccount">Введите имя счета</string>
+
+
     <string name="title_activity_statement">StatementActivity</string>
+
+    <!-- Shared Preferences constant -->
+    <string name="PREF_FILE">SettingsAccount</string>
+    <string name="PREF_NAME">Name</string>
+    <string name="PREF_EMAIL">Email</string>
+    <string name="PREF_BASE_ID">BaseId</string>
+    <string name="PREF_ACCOUNT">Account</string>
+    <string name="PREF_ALL_ACCOUNTS">AllAccounts</string>
 
 
     <!-- <string name="navigation_drawer_open">Open navigation drawer</string> -->
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
+
+
     <!-- <string name="nav_header_subtitle">android.studio@android.com</string> -->
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>

@@ -7,13 +7,28 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#F74C4C4C</color>
 
-    <color name="ripple_effect_sign_in">#47A6F3</color>
-    <color name="ripple_effect_register">#E57373</color>
-    <color name="button_sign_in">#64B5F6</color>
-    <color name="button_register">#FF8A65</color>
-    <color name="button_sign_in_stroke">#467FAE</color>
-    <color name="button_register_stroke">#93533F</color>
+    <!-- Button SignIn -->
+    <color name="ripple_effect_sign_in">#689F38</color>
+    <color name="button_sign_in_stroke">#29672C</color>
+    <color name="button_sign_in">#388E3C</color>
+
+    <!-- Button Register -->
+    <color name="button_register">#E64A19</color>
+    <color name="ripple_effect_register">#F57C00</color>
+    <color name="button_register_stroke">#BD3E15</color>
+
+    <!-- Button OK -->
+    <color name="ripple_effect_ok">#689F38</color>
+    <color name="button_ok_stroke">#29672C</color>
+    <color name="button_ok">#388E3C</color>
+
+    <!-- Button Cancel -->
+    <color name="button_cancel">#979797</color>
+    <color name="ripple_effect_cancel">#4C4C4C</color>
+    <color name="button_cancel_stroke">#605F5F</color>
+
     <color name="app_bar">#64B5F6</color>
 
 

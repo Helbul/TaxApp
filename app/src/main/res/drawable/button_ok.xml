@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:targetApi="lollipop"
-    android:color="@color/ripple_effect_register">
+    android:color="@color/ripple_effect_ok"
+    tools:targetApi="lollipop">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/button_register"></solid>
-            <stroke android:color="@color/button_register_stroke" android:width="2dp"></stroke>
+            <solid android:color="@color/button_ok"></solid>
+            <stroke android:color="@color/button_ok_stroke" android:width="2dp"></stroke>
             <corners android:radius="4dp"></corners>
         </shape>
     </item>
+    
 </ripple>

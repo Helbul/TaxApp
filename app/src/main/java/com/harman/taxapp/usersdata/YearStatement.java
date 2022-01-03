@@ -38,4 +38,6 @@ public class YearStatement {
     public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
     }
+
+
 }

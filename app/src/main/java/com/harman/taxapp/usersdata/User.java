@@ -4,20 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String name, email, password, phone;
-    private ArrayList<Integer> list = new ArrayList<>(); //удалить
+    private String name, email, password, phone, allAccounts;
 
-    public User() {
-        this.list.add(1);//удалить
-        this.list.add(2);//удалить
-        this.list.add(3);//удалить
-    }
+    public User() {}
 
-    public User(String name, String email, String password, String phone) {
+    public User(String name, String email, String password, String phone, String allAccounts) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.allAccounts = allAccounts;
     }
 
     public String getName() {
@@ -52,4 +48,11 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAllAccounts() {
+        return allAccounts;
+    }
+
+    public void setAllAccounts(String allAccounts) {
+        this.allAccounts = allAccounts;
+    }
 }
