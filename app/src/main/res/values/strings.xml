@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">TaxApp</string>
     <string name="app_hello">Приветствует!</string>
-
     <string name="default_account">DefaultAccount</string>
 
+    <!-- Shared Preferences constant -->
+    <string name="PREF_FILE">SettingsAccount</string>
+    <string name="PREF_NAME">Name</string>
+    <string name="PREF_EMAIL">Email</string>
+    <string name="PREF_BASE_ID">BaseId</string>
+    <string name="PREF_ACCOUNT">Account</string>
+    <string name="PREF_ALL_ACCOUNTS">AllAccounts</string>
 
+    <!--Buttons-->
     <string name="buttonCancel">Отменить</string>
     <string name="buttonOpen">Открыть</string>
     <string name="buttonCreate">Создать</string>
@@ -52,15 +59,21 @@
     <string name="underBottomFirstAccount">Введите имя счета</string>
 
 
-    <string name="title_activity_statement">StatementActivity</string>
 
-    <!-- Shared Preferences constant -->
-    <string name="PREF_FILE">SettingsAccount</string>
-    <string name="PREF_NAME">Name</string>
-    <string name="PREF_EMAIL">Email</string>
-    <string name="PREF_BASE_ID">BaseId</string>
-    <string name="PREF_ACCOUNT">Account</string>
-    <string name="PREF_ALL_ACCOUNTS">AllAccounts</string>
+
+
+    <!-- TaxesFragment-->
+    <string name="textTaxesYear">Отчетный год:</string>
+    <string name="textTaxesTax">Сумма налога:</string>
+    <string name="buttonTaxesAddTransaction">Добавить сделку</string>
+    <string name="buttonTaxesLoadingStatement">Загрузить отчет</string>
+
+
+    <!-- NewTransactionFragment-->
+    <string name="editNewTransDate">Дата сделки ДД.ММ.ГГГГ</string>
+    <string name="editNewTransSum">Сумма</string>
+    <string name="buttonNewTransAdd">Добавить</string>
+    <string name="buttonNewTransCancel">Отменить</string>
 
 
     <!-- <string name="navigation_drawer_open">Open navigation drawer</string> -->
@@ -81,5 +94,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_statement">StatementActivity</string>
 
 </resources>

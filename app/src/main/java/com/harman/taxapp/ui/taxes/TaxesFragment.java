@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.harman.taxapp.databinding.FragmentTaxesBinding;
 import com.harman.taxapp.firebase.FirebaseDatabaseHelper;
@@ -82,9 +84,27 @@ public class TaxesFragment extends Fragment {
 
             }
         });
+
+
+        Button buttonAddTrans = rootView.findViewById(R.id.button_taxes_add_trans);
+        buttonAddTrans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(rootView).navigate(R.id.action_nav_taxes_to_nav_new_transaction);
+            }
+        });
+
+
+        Button buttonLoading = rootView.findViewById(R.id.button_taxes_loading);
+        buttonLoading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //написать обработчик
+                //прописать логику обработки отчета xls or ...
+            }
+        });
+
         return rootView;
-
-
     }
 
     @Override

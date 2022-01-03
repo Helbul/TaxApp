@@ -24,12 +24,12 @@
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_home.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_new_account.xml" value="0.264" />
-        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_new_transaction.xml" value="0.2" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_new_transaction.xml" value="0.4" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_select_account.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_taxes.xml" value="0.536" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_taxes.xml" value="0.4" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_transactions.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/nav_header_statement.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/new_account_card.xml" value="0.17391304347826086" />
@@ -37,6 +37,7 @@
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/register_window.xml" value="0.2441123188405797" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/select_account_card.xml" value="0.1703125" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/sign_in_card.xml" value="0.264" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/taxes_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/transactions_fragment.xml" value="0.1638888888888889" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/year_statement_list_item.xml" value="0.536" />
