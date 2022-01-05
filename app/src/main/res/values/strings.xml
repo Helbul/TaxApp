@@ -9,6 +9,8 @@
     <string name="PREF_EMAIL">Email</string>
     <string name="PREF_BASE_ID">BaseId</string>
     <string name="PREF_ACCOUNT">Account</string>
+    <string name="PREF_YEAR">Year</string>
+    <string name="PREF_YEAR_SUM">YearSum</string>
     <string name="PREF_ALL_ACCOUNTS">AllAccounts</string>
 
     <!--Buttons-->
@@ -59,9 +61,6 @@
     <string name="underBottomFirstAccount">Введите имя счета</string>
 
 
-
-
-
     <!-- TaxesFragment-->
     <string name="textTaxesYear">Отчетный год:</string>
     <string name="textTaxesTax">Сумма налога:</string>
@@ -70,10 +69,22 @@
 
 
     <!-- NewTransactionFragment-->
+    <string name="editIdTrans"> Сделка</string>
     <string name="editNewTransDate">Дата сделки ДД.ММ.ГГГГ</string>
     <string name="editNewTransSum">Сумма</string>
     <string name="buttonNewTransAdd">Добавить</string>
     <string name="buttonNewTransCancel">Отменить</string>
+
+
+    <!-- TransactionFragment-->
+    <string name="buttonTransAdd">Добавить сделку</string>
+    <string name="buttonTransDownload">Скачать отчет</string>
+    <string name="buttonTransSendEmail">Отправить на E-mail</string>
+
+
+    <!-- transaction_list_item-->
+    <string name="textCB">Курс ЦБ: </string>
+    <string name="textSumRub">Налог, руб.: </string>
 
 
     <!-- <string name="navigation_drawer_open">Open navigation drawer</string> -->
@@ -86,10 +97,9 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="menu_new_transaction">Новая сделка</string>
     <string name="menu_taxes">Налоги</string>
+    <string name="menu_exit">Выйти</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

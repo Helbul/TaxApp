@@ -18,6 +18,7 @@
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/activity_statement.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/app_bar_statement.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/content_main.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/content_statement.xml" value="0.1" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_first_account.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_gallery.xml" value="0.23052536231884058" />
@@ -30,7 +31,7 @@
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_taxes.xml" value="0.4" />
-        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_transactions.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/fragment_transactions.xml" value="0.4" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/nav_header_statement.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/new_account_card.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/register_card.xml" value="0.2441123188405797" />
@@ -39,9 +40,10 @@
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/sign_in_card.xml" value="0.264" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/taxes_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/transaction_list_item.xml" value="0.4" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/transactions_fragment.xml" value="0.1638888888888889" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/layout/year_statement_list_item.xml" value="0.536" />
-        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.4" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/menu/statement.xml" value="0.1984375" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
         <entry key="..\:/Users/79524/AndroidStudioProjects/TaxApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />

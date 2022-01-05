@@ -1,15 +1,17 @@
 package com.harman.taxapp.usersdata;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class YearStatement {
     String year;
-    String sumTaxes;
-    ArrayList<Transaction> transactions;
+    Double sumTaxes;
+    HashMap<String, Transaction> transactions;
 
     public YearStatement() {}
 
-    public YearStatement(String year, String sumTaxes, ArrayList<Transaction> transactions) {
+    public YearStatement(String year, Double sumTaxes, HashMap<String, Transaction> transactions) {
         this.year = year;
         this.sumTaxes = sumTaxes;
         this.transactions = transactions;
@@ -23,21 +25,19 @@ public class YearStatement {
         this.year = year;
     }
 
-    public String getSumTaxes() {
+    public Double getSumTaxes() {
         return sumTaxes;
     }
 
-    public void setSumTaxes(String sumTaxes) {
+    public void setSumTaxes(Double sumTaxes) {
         this.sumTaxes = sumTaxes;
     }
 
-    public ArrayList<Transaction> getTransactions() {
+    public HashMap<String, Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<Transaction> transactions) {
+    public void setTransactions(HashMap<String, Transaction> transactions) {
         this.transactions = transactions;
     }
-
-
 }

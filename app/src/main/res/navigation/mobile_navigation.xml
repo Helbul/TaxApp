@@ -34,10 +34,15 @@
             app:destination="@id/transactionsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/exitFragment"
+        android:name="com.harman.taxapp.ui.exit.ExitFragment"
+        android:label="fragment_exit"
+        tools:layout="@layout/fragment_exit" />
+    <fragment
         android:id="@+id/transactionsFragment"
         android:name="com.harman.taxapp.ui.transactions.TransactionsFragment"
-        android:label="transactions_fragment"
-        tools:layout="@layout/transactions_fragment" >
+        android:label="fragment_transactions"
+        tools:layout="@layout/fragment_transactions" >
         <action
             android:id="@+id/action_transactionsFragment_to_taxesFragment"
             app:destination="@id/taxesFragment" />

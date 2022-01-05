@@ -25,6 +25,8 @@ public class HomeViewModel extends AndroidViewModel {
         String settings = allSettings.getString(String.valueOf(R.string.PREF_EMAIL), "");
         settings += " " + allSettings.getString(String.valueOf(R.string.PREF_BASE_ID), "");
         settings += " " + allSettings.getString(String.valueOf(R.string.PREF_ACCOUNT), "");
+
+
         mText.setValue(settings);
     }
 

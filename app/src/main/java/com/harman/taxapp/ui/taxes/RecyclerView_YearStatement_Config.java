@@ -1,12 +1,14 @@
 package com.harman.taxapp.ui.taxes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +20,14 @@ import java.util.List;
 public class RecyclerView_YearStatement_Config {
     private Context mContext;
     private YearStatementAdapter mYearStatementAdapter;
+    private SharedPreferences settings;
+    private SharedPreferences.Editor editorSettings;
+    
 
     public void setConfig(RecyclerView recyclerView, Context context, List<YearStatement> yearStatements, List<String> keys){
         mContext = context;
+        settings = mContext.getSharedPreferences(String.valueOf(R.string.PREF_FILE), Context.MODE_PRIVATE);
+        editorSettings = settings.edit();
         mYearStatementAdapter = new YearStatementAdapter(yearStatements, keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mYearStatementAdapter);
@@ -41,7 +48,11 @@ public class RecyclerView_YearStatement_Config {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //добавить переход на список сдeлок текущего года
+                    editorSettings.putString(String.valueOf(R.string.PREF_YEAR), String.valueOf(mYear.getText()));
+                    editorSettings.apply();
+                    editorSettings.putString(String.valueOf(R.string.PREF_YEAR_SUM), String.valueOf(mYearSum.getText()));
+                    editorSettings.apply();
+                    Navigation.findNavController(v).navigate(R.id.action_taxesFragment_to_transactionsFragment);
                 }
             });
         }

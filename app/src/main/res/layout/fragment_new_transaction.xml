@@ -28,7 +28,17 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editDateTransaction"
+            android:id="@+id/edit_id_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/editIdTrans"
+            android:inputType="text"
+            android:layout_marginBottom="15dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/edit_date_transaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -38,7 +48,7 @@
             android:textSize="20sp"/>
 
         <EditText
-            android:id="@+id/editSum"
+            android:id="@+id/edit_sum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
