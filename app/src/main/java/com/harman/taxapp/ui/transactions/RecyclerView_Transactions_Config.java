@@ -1,6 +1,7 @@
 package com.harman.taxapp.ui.transactions;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,7 @@ import com.harman.taxapp.ui.taxes.RecyclerView_YearStatement_Config;
 import com.harman.taxapp.usersdata.Transaction;
 import com.harman.taxapp.usersdata.YearStatement;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecyclerView_Transactions_Config {
@@ -31,6 +34,7 @@ public class RecyclerView_Transactions_Config {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mTransactionsAdapter);
     }
+
 
     class TransactionItemView extends RecyclerView.ViewHolder {
         private TextView idTrans;
@@ -58,6 +62,25 @@ public class RecyclerView_Transactions_Config {
                 @Override
                 public void onClick(View v) {
                     //написать обрабочик нажатия на сделку. Добавить возможность ее редактирования.
+                    String s = itemView.getTransitionName();
+                    Log.d(TAG, "onClick: SSSS" + s);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key", key);
+                    Log.d(TAG, "onClick: key" + key);
+                    bundle.putString("id", (String) idTrans.getText());
+                    Log.d(TAG, "onClick: id" + idTrans.getText());
+                    bundle.putString("type", (String) type.getText());
+                    Log.d(TAG, "onClick: type" + type.getText());
+                    bundle.putString("date", (String) date.getText());
+                    Log.d(TAG, "onClick: date" + date.getText());
+                    bundle.putString("valuta", String.valueOf(valuta.getText()));
+                    Log.d(TAG, "onClick: valuta" + valuta.getText());
+                    bundle.putDouble("sum", Double.parseDouble(String.valueOf(sum.getText())));
+                    bundle.putDouble("sumRub", Double.parseDouble(String.valueOf(sumRub.getText())));
+                    Log.d(TAG, "onClick: sum" + sum.getText());
+                    Log.d(TAG, "onClick: bundle" + bundle.getString("key"));
+
+                    Navigation.findNavController(v).navigate(R.id.action_transactionsFragment_to_transactionDetailsFragment, bundle);
                 }
             });
         }
@@ -69,7 +92,8 @@ public class RecyclerView_Transactions_Config {
             sum.setText(String.valueOf(transaction.getSum()));
             valuta.setText(String.valueOf(transaction.getValuta()));
             cb.setText(String.valueOf(transaction.getRateCentralBank()));
-            sumRub.setText(String.valueOf(transaction.getSumRub()));
+            String sumRubString = String.format("%.2f", transaction.getSumRub());
+            sumRub.setText(sumRubString);
             this.key = key;
         }
     }

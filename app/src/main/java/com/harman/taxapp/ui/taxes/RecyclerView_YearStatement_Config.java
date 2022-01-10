@@ -58,8 +58,9 @@ public class RecyclerView_YearStatement_Config {
         }
 
         public void bind (YearStatement yearStatement, String key) {
+            String yearSum = String.format("%.2f", yearStatement.getSumTaxes());
             mYear.setText(String.valueOf(yearStatement.getYear()));
-            mYearSum.setText(String.valueOf(yearStatement.getSumTaxes()));
+            mYearSum.setText(yearSum);
             this.key = key;
         }
     }

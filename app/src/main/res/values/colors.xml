@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#F74C4C4C</color>
+    <color name="button_text">#FFFFFFFF</color>
+
 
     <!-- Button SignIn -->
     <color name="ripple_effect_sign_in">#689F38</color>

@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/app_bar"
+            android:background="#23503D"
             app:popupTheme="@style/Theme.TaxApp.PopupOverlay" />
             <!--android:background="?attr/colorPrimary"-->
 

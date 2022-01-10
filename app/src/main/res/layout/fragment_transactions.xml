@@ -7,10 +7,10 @@
     tools:context=".ui.transactions.TransactionsFragment">
 
     <TextView
-        android:id="@+id/textTransYearSum"
+        android:id="@+id/text_trans_year_sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="налог за текущий год"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,14 +20,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_transactions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toTopOf="@+id/button_trans_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTransYearSum"
+        app:layout_constraintTop_toBottomOf="@+id/text_trans_year_sum"
         app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -41,6 +40,19 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_ok"
         android:text="@string/buttonTransAdd"
+        app:layout_constraintBottom_toTopOf="@+id/button_trans_delete_year"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_trans_delete_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_ok"
+        android:text="@string/buttonTransDelete"
         app:layout_constraintBottom_toTopOf="@+id/button_trans_download"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

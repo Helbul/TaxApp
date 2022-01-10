@@ -70,14 +70,24 @@
 
     <!-- NewTransactionFragment-->
     <string name="editIdTrans"> Сделка</string>
-    <string name="editNewTransDate">Дата сделки ДД.ММ.ГГГГ</string>
+    <string name="editNewTransDate">Дата сделки ДД/ММ/ГГГГ</string>
     <string name="editNewTransSum">Сумма</string>
     <string name="buttonNewTransAdd">Добавить</string>
     <string name="buttonNewTransCancel">Отменить</string>
 
 
+    <!-- NewTransactionFragment-->
+    <string name="editIdDetail"> Сделка</string>
+    <string name="editDetailDate">Дата сделки ДД/ММ/ГГГГ</string>
+    <string name="editDetailSum">Сумма</string>
+    <string name="buttonDetailUpdate">Обновить</string>
+    <string name="buttonDerailDelete">Удалить</string>
+    <string name="buttonDetailCancel">Отменить</string>
+
+
     <!-- TransactionFragment-->
     <string name="buttonTransAdd">Добавить сделку</string>
+    <string name="buttonTransDelete">Удалить все</string>
     <string name="buttonTransDownload">Скачать отчет</string>
     <string name="buttonTransSendEmail">Отправить на E-mail</string>
 
@@ -100,6 +110,9 @@
     <string name="menu_new_transaction">Новая сделка</string>
     <string name="menu_taxes">Налоги</string>
     <string name="menu_exit">Выйти</string>
+    <string name="menu_currency_rate">Курсы валют на сегодня</string>
+    <string name="menu_transaction_detail">Редактирование сделки</string>
+    <string name="menu_transactions">Годовой отчет</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

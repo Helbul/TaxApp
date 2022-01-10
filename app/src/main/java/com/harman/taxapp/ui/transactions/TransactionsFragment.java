@@ -10,13 +10,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.harman.taxapp.R;
 import com.harman.taxapp.databinding.FragmentTransactionsBinding;
 import com.harman.taxapp.ui.taxes.TaxesViewModel;
@@ -74,6 +78,50 @@ public class TransactionsFragment extends Fragment {
 
             }
         });
+
+
+        TextView textYearTax = rootView.findViewById(R.id.text_trans_year_sum);
+        transactionsViewModel.getSumTaxes().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(Double yearTax) {
+                String s = String.format(" Налог за %s год: %.2f", year, yearTax);
+                textYearTax.setText(s);
+            }
+        });
+
+        Button buttonAdd = rootView.findViewById(R.id.button_trans_add);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_transactionsFragment_to_newTransactionFragment);
+            }
+        });
+
+        Button buttonDelete = rootView.findViewById(R.id.button_trans_delete_year);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transactionsViewModel.deleteYear(year);
+
+            }
+        });
+
+        Button buttonDownload= rootView.findViewById(R.id.button_trans_download);
+        buttonDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //!!!!!!
+            }
+        });
+
+        Button buttonSend= rootView.findViewById(R.id.button_trans_send_email);
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //!!!!!!
+            }
+        });
+
         return rootView;
     }
 

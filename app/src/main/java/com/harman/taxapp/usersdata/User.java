@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String name, email, password, phone, allAccounts;
+    private String name, email, password, phone;
 
     public User() {}
 
-    public User(String name, String email, String password, String phone, String allAccounts) {
+    public User(String name, String email, String password, String phone) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.allAccounts = allAccounts;
+        //this.allAccounts = allAccounts;
     }
 
     public String getName() {
@@ -48,11 +48,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAllAccounts() {
-        return allAccounts;
-    }
-
-    public void setAllAccounts(String allAccounts) {
-        this.allAccounts = allAccounts;
-    }
+//    public String getAllAccounts() {
+//        return allAccounts;
+//    }
+//
+//    public void setAllAccounts(String allAccounts) {
+//        this.allAccounts = allAccounts;
+//    }
 }

@@ -26,21 +26,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.harman.taxapp.R;
 import com.harman.taxapp.firebase.FirebaseDatabaseHelper;
-import com.harman.taxapp.activities.MainActivity;
+import com.harman.taxapp.retrofit2.Controller;
+import com.harman.taxapp.retrofit2.Currencies;
 import com.harman.taxapp.usersdata.Transaction;
-import com.harman.taxapp.usersdata.YearStatement;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class NewTransactionFragment extends Fragment {
     private final String TAG = "OLGA";
 
-    Double oldSumYear = 0.0;
-    Double currentSumYear;
-    SharedPreferences settings;
+    private Double oldSumYear = 0.0;
+    private Double currentSumYear;
+    private SharedPreferences settings;
+    private Double rateCentralBankDouble;
 
     public NewTransactionFragment() {
     }
@@ -62,37 +66,40 @@ public class NewTransactionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         settings = getContext().getSharedPreferences(String.valueOf(string.PREF_FILE), Context.MODE_PRIVATE);
 
-        Spinner typeTransaction = view.findViewById(id.spinner_type_transaction);
-        EditText idTrans = view.findViewById(id.edit_id_transaction);
-        EditText date = view.findViewById(id.edit_date_transaction);
-        EditText sum = view.findViewById(id.edit_sum);
-        Spinner currencies = view.findViewById(id.spinner_currencies);
+        Spinner typeTransaction = view.findViewById(id.spinner_type_new_trans);
+        EditText idTrans = view.findViewById(id.edit_id_new_trans);
+        EditText date = view.findViewById(id.edit_date_new_trans);
+        EditText sum = view.findViewById(id.edit_sum_new_trans);
+        Spinner currencies = view.findViewById(id.spinner_currencies_new_trans);
 
         final String[] arrayTypeTrans = getResources().getStringArray(array.type_transaction);
         final String[] arrayCurrencies = getResources().getStringArray(array.currencies);
 
         //Вынести ArrayAdapter в отдельный свой класс????
-        final ArrayAdapter<String> currenciesArrayAdapter = new ArrayAdapter<String>(this.getContext(), spinner_item, arrayCurrencies){
-            @Override
-            public boolean isEnabled(int position) {
-                return position != 0;
-                }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0){
-                    tv.setTextColor(Color.GRAY);
-                }
-                else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        };
-        currenciesArrayAdapter.setDropDownViewResource(spinner_item);
+//        final ArrayAdapter<String> currenciesArrayAdapter = new ArrayAdapter<String>(this.getContext(), spinner_item, arrayCurrencies){
+//            @Override
+//            public boolean isEnabled(int position) {
+//                return position != 0;
+//                }
+//
+//            @Override
+//            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//                View view = super.getDropDownView(position, convertView, parent);
+//                TextView tv = (TextView) view;
+//                if(position == 0){
+//                    tv.setTextColor(Color.GRAY);
+//                }
+//                else {
+//                    tv.setTextColor(Color.BLACK);
+//                }
+//                return view;
+//            }
+//        };
+//        currenciesArrayAdapter.setDropDownViewResource(spinner_item);
+//        currencies.setAdapter(currenciesArrayAdapter);
+        final ArrayAdapter<String> currenciesArrayAdapter = new ArrayAdapter<String>(this.getContext(), spinner_item, arrayCurrencies);
         currencies.setAdapter(currenciesArrayAdapter);
+        currencies.setSelection(currenciesArrayAdapter.getPosition("USD"));
 
 
         final ArrayAdapter<String> typeTransArrayAdapter = new ArrayAdapter<String>(this.getContext(), spinner_item, arrayTypeTrans){
@@ -114,7 +121,7 @@ public class NewTransactionFragment extends Fragment {
                 return view;
             }
         };
-        currenciesArrayAdapter.setDropDownViewResource(spinner_item);
+        typeTransArrayAdapter.setDropDownViewResource(spinner_item);
         typeTransaction.setAdapter(typeTransArrayAdapter);
 
 
@@ -170,69 +177,59 @@ public class NewTransactionFragment extends Fragment {
 
                 Transaction transaction = new Transaction();
 
-                //ДОБАВИТЬ id сделки!!!!
-
                 transaction.setType(typeTransaction.getSelectedItem().toString());
-                transaction.setDate(date.getText().toString());
+                String dateString = date.getText().toString();
+                transaction.setDate(dateString);
                 transaction.setId(idTrans.getText().toString());
                 transaction.setSum(sumDouble);
-                transaction.setValuta(currencies.getSelectedItem().toString());
+                String currency = currencies.getSelectedItem().toString();
+                transaction.setValuta(currency);
 
                 //Добавиь поддрузку данных!!!!!!!!!!!!!!
-                Double rateCentralBankDouble = 75.00;
-                transaction.setRateCentralBank(rateCentralBankDouble);
-                Double sumRubDouble = sumDouble * rateCentralBankDouble;
-                transaction.setSumRub(sumRubDouble);
-
-                new FirebaseDatabaseHelper(idUser, account).addTransaction(year, transaction, new FirebaseDatabaseHelper.DataStatusTrans() {
+                //rateCentralBankDouble = 1.00;
+                Controller ctrl = new Controller(dateString);
+                Call<Currencies> currenciesCall = ctrl.prepareCurrenciesCall();
+                currenciesCall.enqueue(new Callback<Currencies>() {
                     @Override
-                    public void DataIsLoaded(List<Transaction> transactions, List<String> keys) {}
+                    public void onResponse(Call<Currencies> call, Response<Currencies> response) {
+                        if (response.isSuccessful()) {
+                            Currencies cur = response.body();
+                            rateCentralBankDouble = cur.getCurrencyRate(currency);
+                            //currencies.setValue(response.body());
+                            transaction.setRateCentralBank(rateCentralBankDouble);
+                            Double sumRubDouble = sumDouble * rateCentralBankDouble * 0.13;
+                            transaction.setSumRub(sumRubDouble);
 
-                    @Override
-                    public void DataIsInserted() {
-                        Snackbar.make(v, "Сделка добавлена", Snackbar.LENGTH_SHORT).show();
+                            new FirebaseDatabaseHelper(idUser, account).addTransaction(year, transaction, new FirebaseDatabaseHelper.DataStatusTrans() {
+                                @Override
+                                public void DataIsLoaded(List<Transaction> transactions, List<String> keys) {}
+                                @Override
+                                public void DataIsInserted() {
+                                    Snackbar.make(v, "Сделка добавлена", Snackbar.LENGTH_SHORT).show();}
+                                @Override
+                                public void DataIsDeleted() {}
+                                @Override
+                                public void DataIsUpdated() {}
+                            });
+
+                            new FirebaseDatabaseHelper(idUser, account).readYearSumOnce(year, new FirebaseDatabaseHelper.DataStatusYearSum() {
+                                @Override
+                                public void DataIsLoaded(Double sumTaxes) {
+                                    oldSumYear = sumTaxes;
+                                    currentSumYear = oldSumYear + sumRubDouble;
+                                    Log.d(TAG, "onClick: currentSumYear");
+                                    new FirebaseDatabaseHelper(idUser, account).updateYearSum(year, currentSumYear);
+                                }
+
+                            });
+                        } else {
+                            //написать что-то
+                        }
                     }
 
                     @Override
-                    public void DataIsDeleted() {}
-
-                    @Override
-                    public void DataIsUpdated() {}
-                });
-
-                new FirebaseDatabaseHelper(idUser, account).readYearSum(year, new FirebaseDatabaseHelper.DataStatusYearSum() {
-                    @Override
-                    public void DataIsLoaded(Double sumTaxes) {
-                        oldSumYear = sumTaxes;
-                    }
-
-                    @Override
-                    public void DataIsInserted() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
-                    }
-                });
-
-                currentSumYear = oldSumYear + sumRubDouble;
-                Log.d(TAG, "onClick: currentSumYear");
-                new FirebaseDatabaseHelper(idUser, account).updateYearSum(year, currentSumYear, new FirebaseDatabaseHelper.DataStatusYearSum() {
-                    @Override
-                    public void DataIsLoaded(Double sumTaxes) {
-
-                    }
-
-                    @Override
-                    public void DataIsInserted() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
+                    public void onFailure(Call<Currencies> call, Throwable t) {
+                        //написать что-то
                     }
                 });
 

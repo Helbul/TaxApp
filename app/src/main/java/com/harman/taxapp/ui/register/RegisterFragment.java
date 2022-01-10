@@ -1,5 +1,7 @@
 package com.harman.taxapp.ui.register;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,6 @@ public class RegisterFragment extends Fragment {
     DatabaseReference users;
 
     public RegisterFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -44,7 +45,6 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
@@ -89,6 +89,11 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
+                if (!new EmailCheck(email.getText().toString()).check()) { //добавить проверку e-mail, firebase не всегда регит
+                    Snackbar.make(v, "Некорректный email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //регистрация пользователя
                 auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -99,7 +104,7 @@ public class RegisterFragment extends Fragment {
                                 user.setEmail(email.getText().toString());
                                 user.setPhone(phone.getText().toString());
                                 user.setPassword(password.getText().toString());
-                                user.setAllAccounts("no");
+                                //user.setAllAccounts("no");
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
@@ -107,6 +112,15 @@ public class RegisterFragment extends Fragment {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
+                                                SharedPreferences settings = getContext().getSharedPreferences(String.valueOf(R.string.PREF_FILE), Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor preferenceEditor = settings.edit();
+                                                preferenceEditor.putString(String.valueOf(R.string.PREF_EMAIL), user.getEmail());
+                                                preferenceEditor.apply();
+                                                String idUser = auth.getCurrentUser().getUid();
+                                                preferenceEditor.putString(String.valueOf(R.string.PREF_BASE_ID), idUser);
+                                                preferenceEditor.apply();
+                                                preferenceEditor.putString(String.valueOf(R.string.PREF_NAME), user.getName());
+                                                preferenceEditor.apply();
                                                 Snackbar.make(v, "Пользователь добавлен!", Snackbar.LENGTH_SHORT).show();
                                                 Navigation.findNavController(v).navigate(R.id.action_registerFragment_to_firstAccountFragment);
                                             }
@@ -122,6 +136,12 @@ public class RegisterFragment extends Fragment {
 
 
                         });
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Snackbar.make(v, "Ошибка авторизациию. " + Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_SHORT).show();
+//                            }
+//                        });
             }
         });
 

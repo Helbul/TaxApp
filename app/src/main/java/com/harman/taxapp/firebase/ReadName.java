@@ -35,17 +35,6 @@ public class ReadName extends AndroidViewModel {
         DatabaseReference users = database.getReference("Users");
         DatabaseReference mReference = users.child(idUser).child("name");
 
-        //не работает!
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            // Name, email address, and profile photo Url
-//            String nameUser = user.getDisplayName();
-//            name.postValue(nameUser);
-//                preferenceEditor.putString(String.valueOf(R.string.PREF_NAME), nameUser);
-//                preferenceEditor.apply();
-//        }
-
-
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/ripple_effect_cancel"
+    android:color="#737373"
     tools:targetApi="lollipop">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/button_cancel"></solid>
-            <stroke android:color="@color/button_cancel_stroke" android:width="2dp"></stroke>
-            <corners android:radius="4dp"></corners>
+            <solid android:color="#C3C3C3"></solid>
+            <stroke android:color="#9C9C9C" android:width="1dp"></stroke>
+            <corners android:radius="24dp"></corners>
         </shape>
     </item>
     

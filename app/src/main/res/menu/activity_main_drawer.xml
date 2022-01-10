@@ -20,6 +20,11 @@
             android:title="@string/menu_taxes" />
 
         <item
+            android:id="@+id/ratesTodayFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_currency_rate" />
+
+        <item
             android:id="@+id/exitFragment"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_exit" />

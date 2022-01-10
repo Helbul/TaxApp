@@ -4,7 +4,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,10 +24,12 @@ public class FirebaseDatabaseHelper {
     private final String TAG = "OLGA";
 
     private FirebaseDatabase mDatabase;
+    private DatabaseReference mReferenceUser;
     private DatabaseReference mReferenceYearStatements;
     private List<YearStatement> yearStatements = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
     private Double sumTaxes = new Double(0);
+    private String[] accounts;
     //private YearStatement yearStatement = new YearStatement();
 
     public interface DataStatus{
@@ -44,15 +48,53 @@ public class FirebaseDatabaseHelper {
 
     public interface DataStatusYearSum {
         void DataIsLoaded(Double sumTaxes);
-        void DataIsInserted();
-        void DataIsUpdated();
+//        void DataIsInserted();
+//        void DataIsUpdated();
     }
 
+    public interface DataStatusAccount{
+        void DataIsLoaded(String[] accounts);
+
+    }
+
+    public FirebaseDatabaseHelper (String idUser){
+        mDatabase = FirebaseDatabase.getInstance();
+        mReferenceUser = mDatabase.getReference("Users").child(idUser);
+    }
 
     public FirebaseDatabaseHelper (String idUser, String account){
         mDatabase = FirebaseDatabase.getInstance();
+        mReferenceUser = mDatabase.getReference("Users").child(idUser);
         mReferenceYearStatements = mDatabase.getReference("Users").child(idUser).child("accounts").child(account);
     }
+
+
+
+
+    public void readAccounts (final DataStatusAccount dataStatus) {
+        DatabaseReference mReferenceAccounts = mReferenceUser.child("accounts");
+        mReferenceAccounts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() == null) {
+                    accounts = new String[]{"DefaultAccount"};
+                } else {
+                    List<String> keys = new ArrayList<>();
+                    for (DataSnapshot keyNode: snapshot.getChildren()) {
+                        keys.add(keyNode.getKey());
+                    }
+                    accounts = keys.toArray(new String[0]);
+                }
+                dataStatus.DataIsLoaded(accounts);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     public void readYearSum (String year, final DataStatusYearSum dataStatus) {
         DatabaseReference mReferenceYearStatement = mReferenceYearStatements.child(year).child("sumTaxes");
@@ -64,7 +106,7 @@ public class FirebaseDatabaseHelper {
                 } else {
                     String s = snapshot.getValue().toString();
                     sumTaxes = Double.parseDouble(s);
-                    //sumTaxes = (Double) snapshot.getValue() + 0.0;
+                    //возможно не надо парсиь а дабл???
                 }
                 dataStatus.DataIsLoaded(sumTaxes);
             }
@@ -76,16 +118,36 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void updateYearSum (String year, Double sum, final DataStatusYearSum dataStatusYearSum){
-        //DatabaseReference mReferenceYearStatement = mReferenceYearStatements.child(year);
+    public void readYearSumOnce (String year, final DataStatusYearSum dataStatus) {
         DatabaseReference mReferenceYearStatement = mReferenceYearStatements.child(year).child("sumTaxes");
-        //mReferenceYearStatement.child("year").setValue(year);
-        //mReferenceYearStatement.child("sumTaxes").setValue(sum)
+        mReferenceYearStatement.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    if (task.getResult().getValue() == null) {
+                        sumTaxes = 0.0;
+                        Log.d("firebase", "onComplete: " + sumTaxes);
+                    } else {
+                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                        String s = String.valueOf(task.getResult().getValue());
+                        sumTaxes = Double.parseDouble(s);
+                    }
+                    dataStatus.DataIsLoaded(sumTaxes);
+                }
+            }
+        });
+    }
+
+    public void updateYearSum (String year, Double sum){
+        DatabaseReference mReferenceYearStatement = mReferenceYearStatements.child(year).child("sumTaxes");
         mReferenceYearStatement.setValue(sum)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        dataStatusYearSum.DataIsUpdated();
+                        //dataStatusYearSum.DataIsUpdated();
                     }
                 });
     }
@@ -122,47 +184,27 @@ public class FirebaseDatabaseHelper {
                     keys.add(keyNode.getKey());
                     Transaction transaction = keyNode.getValue(Transaction.class);
                     transactions.add(transaction);
-                    //yearStatement = keyNode.getValue(YearStatement.class);
-//                    Log.d(TAG, "onDataChange: ну здесь-то должны быть");
-//                    if (keyNode.getKey().equals("year")){
-//                        yearStatement.setYear(keyNode.getValue(String.class));
-//                        Log.d(TAG, "onDataChange: а тут побываем?");
-//                        return;
-//                    }
-//                    if (keyNode.getKey().equals("sumTaxes")){
-//                        yearStatement.setSumTaxes(keyNode.getValue(Double.class));
-//                        return;
-//                    }
-//                    Transaction transaction = keyNode.getValue(Transaction.class);
-//                    transactions.put(keyNode.getKey(), transaction);
-//                    Log.d(TAG, "onDataChange789789: " + transactions.size());
                 }
-                //yearStatement.setTransactions(transactions);
                 dataStatusTrans.DataIsLoaded(transactions, keys);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG, "onCancelled: ??????????????");
             }
         });
     }
 
     public void addTransaction(String year, Transaction transaction, final DataStatusTrans dataStatusTrans){
-        //DatabaseReference mReferenceCurrentTransaction = mReferenceYearStatements.child(year).child("transactions");
         DatabaseReference mReferenceCurrentTransaction = mReferenceYearStatements.child(year);
         String key = mReferenceCurrentTransaction.child("transactions").push().getKey();
-        Log.d(TAG, "addTransaction: " + transaction.toString());
         mReferenceCurrentTransaction.child("transactions").child(key).setValue(transaction)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         dataStatusTrans.DataIsInserted();
-                        Log.d(TAG, "onSuccess: успех????");
                     }
                 });
         mReferenceCurrentTransaction.child("year").setValue(year);
-        //добавить запись суммы годового налога
     }
 
     public void updateTransaction (String year, String key, Transaction transaction, final DataStatusTrans dataStatusTrans){

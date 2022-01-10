@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.harman.taxapp.databinding.FragmentTaxesBinding;
 import com.harman.taxapp.firebase.FirebaseDatabaseHelper;
 import com.harman.taxapp.R;
@@ -67,58 +68,27 @@ public class TaxesFragment extends Fragment {
         taxesViewModel.getYearStatements().observe(getViewLifecycleOwner(), new Observer<List<YearStatement>>() {
             @Override
             public void onChanged(List<YearStatement> yearStatements) {
-                taxesViewModel.getKeys().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-                    @Override
-                    public void onChanged(List<String> keys) {
-                        if (taxesViewModel.getKeys().getValue() != null) {
-                            recyclerView_year.setConfig(finalMRecyclerView, rootView.getContext(), yearStatements, keys);
-                        }
-                    }
+                taxesViewModel.getKeys().observe(getViewLifecycleOwner(), keys -> {
+                        recyclerView_year.setConfig(finalMRecyclerView, rootView.getContext(), yearStatements, keys);
                 });
 
             }
         });
 
-//        new FirebaseDatabaseHelper(idUser, account).readYearStatements(new FirebaseDatabaseHelper.DataStatus() {
-//            @Override
-//            public void DataIsLoaded(List<YearStatement> yearStatements, List<String> keys) {
-//                recyclerView_year.setConfig(mRecyclerView, rootView.getContext(), yearStatements, keys);
-//            }
-//
-//            @Override
-//            public void DataIsInserted() {
-//
-//            }
-//
-//            @Override
-//            public void DataIsUpdated() {
-//
-//            }
-//
-//            @Override
-//            public void DataIsDeleted() {
-//
-//            }
-//        });
-
-
         Button buttonAddTrans = rootView.findViewById(R.id.button_taxes_add_trans);
-        buttonAddTrans.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(rootView).navigate(R.id.action_nav_taxes_to_nav_new_transaction);
-            }
-        });
+        buttonAddTrans.setOnClickListener(v -> Navigation.findNavController(rootView).navigate(R.id.action_nav_taxes_to_nav_new_transaction));
 
 
         Button buttonLoading = rootView.findViewById(R.id.button_taxes_loading);
         buttonLoading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Snackbar.make(v, "click loading", Snackbar.LENGTH_SHORT).show();
                 //написать обработчик
                 //прописать логику обработки отчета xls or ...
             }
         });
+
 
         return rootView;
     }

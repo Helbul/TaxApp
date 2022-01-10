@@ -30,7 +30,7 @@
 //        String idUser = settings.getString(String.valueOf(R.string.PREF_BASE_ID), "");
 //        //Log.d(TAG, "onViewCreated1: " + idUser);
 //
-//        //new ReadAccounts(idUser).obser
+//        //new SelectAccountViewModel(idUser).obser
 //
 //        mReference = users.child(idUser).child("account_names");
 //        mReference.addValueEventListener(new ValueEventListener() {

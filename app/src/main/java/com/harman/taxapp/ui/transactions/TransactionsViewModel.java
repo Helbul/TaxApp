@@ -24,32 +24,68 @@ public class TransactionsViewModel extends AndroidViewModel {
     //MutableLiveData<YearStatement> yearStatement;
     MutableLiveData<List<String>> keys;
     MutableLiveData<List<Transaction>> transactions;
-    //MutableLiveData<Double> sumTaxes;
+    MutableLiveData<Double> sumTaxes;
     //MutableLiveData<String> year;
 
     public TransactionsViewModel(@NonNull Application application) {
         super(application);
 
-        //yearStatement = new MutableLiveData<YearStatement>();
         transactions = new MutableLiveData<List<Transaction>>();
-        //sumTaxes = new MutableLiveData<Double>();
+        sumTaxes = new MutableLiveData<Double>();
         keys = new MutableLiveData<List<String>>();
+
         settings = getApplication().getSharedPreferences(String.valueOf(R.string.PREF_FILE), Context.MODE_PRIVATE);
         String idUser = settings.getString(String.valueOf(R.string.PREF_BASE_ID), "");
         String account = settings.getString(String.valueOf(R.string.PREF_ACCOUNT), "");
-        String year = settings.getString(String.valueOf(R.string.PREF_YEAR), "");
-        Log.i(TAG, "TransactionsViewModel: " + year);
+        String mYear = settings.getString(String.valueOf(R.string.PREF_YEAR), "");
 
-        new FirebaseDatabaseHelper(idUser, account).readTransactions(year, new FirebaseDatabaseHelper.DataStatusTrans() {
+        new FirebaseDatabaseHelper(idUser, account).readTransactions(mYear, new FirebaseDatabaseHelper.DataStatusTrans() {
             @Override
             public void DataIsLoaded(List<Transaction> transactionsDB, List<String> keysDB) {
-                Log.d(TAG, "DataIsLoaded: сюда доходит???");
-                Log.d(TAG, "DataIsLoaded: " + transactionsDB.size());
-                //сюда даже не дошел...
                 transactions.setValue(transactionsDB);
                 keys.setValue(keysDB);
-
             }
+
+            @Override
+            public void DataIsInserted() { }
+
+            @Override
+            public void DataIsUpdated() { }
+
+            @Override
+            public void DataIsDeleted() { }
+        });
+
+        new FirebaseDatabaseHelper(idUser, account).readYearSum(mYear, new FirebaseDatabaseHelper.DataStatusYearSum() {
+            @Override
+            public void DataIsLoaded(Double sumTaxesDB) {
+                sumTaxes.setValue(sumTaxesDB);
+            }
+        });
+
+
+    }
+
+    public LiveData<List<String>> getKeys() {
+        return keys;
+    }
+
+    public MutableLiveData<List<Transaction>> getTransactions() {
+        return transactions;
+    }
+
+    public MutableLiveData<Double> getSumTaxes() {
+        return sumTaxes;
+    }
+
+    public void deleteYear (String year) {
+        settings = getApplication().getSharedPreferences(String.valueOf(R.string.PREF_FILE), Context.MODE_PRIVATE);
+        String idUser = settings.getString(String.valueOf(R.string.PREF_BASE_ID), "");
+        String account = settings.getString(String.valueOf(R.string.PREF_ACCOUNT), "");
+        new FirebaseDatabaseHelper(idUser, account).deleteYearStatement(year, new FirebaseDatabaseHelper.DataStatus() {
+            @Override
+            public void DataIsLoaded(List<YearStatement> yearStatements, List<String> keys) {
+                            }
 
             @Override
             public void DataIsInserted() {
@@ -66,27 +102,5 @@ public class TransactionsViewModel extends AndroidViewModel {
 
             }
         });
-
-
     }
-
-//    public MutableLiveData<YearStatement> getYearStatement() {
-//        return yearStatement;
-//    }
-
-    public LiveData<List<String>> getKeys() {
-        return keys;
-    }
-
-    public MutableLiveData<List<Transaction>> getTransactions() {
-        return transactions;
-    }
-
-//    public MutableLiveData<Double> getSumTaxes() {
-//        return sumTaxes;
-//    }
-
-//    public MutableLiveData<String> getYear() {
-//        return year;
-//    }
 }
