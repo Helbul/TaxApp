@@ -11,22 +11,22 @@
 
         <item
             android:id="@+id/newTransactionFragment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_post_add_24"
             android:title="@string/menu_new_transaction" />
 
         <item
             android:id="@+id/taxesFragment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_monetization_on_24"
             android:title="@string/menu_taxes" />
 
         <item
             android:id="@+id/ratesTodayFragment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_timeline_24"
             android:title="@string/menu_currency_rate" />
 
         <item
             android:id="@+id/exitFragment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:title="@string/menu_exit" />
 
     </group>

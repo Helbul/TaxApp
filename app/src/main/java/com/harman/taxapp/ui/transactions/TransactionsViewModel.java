@@ -21,11 +21,9 @@ public class TransactionsViewModel extends AndroidViewModel {
     private final String TAG = "OLGA";
     private SharedPreferences settings;
 
-    //MutableLiveData<YearStatement> yearStatement;
     MutableLiveData<List<String>> keys;
     MutableLiveData<List<Transaction>> transactions;
     MutableLiveData<Double> sumTaxes;
-    //MutableLiveData<String> year;
 
     public TransactionsViewModel(@NonNull Application application) {
         super(application);

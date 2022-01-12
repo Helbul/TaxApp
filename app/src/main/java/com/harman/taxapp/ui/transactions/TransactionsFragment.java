@@ -20,15 +20,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.harman.taxapp.R;
+import com.harman.taxapp.activities.MainActivity;
 import com.harman.taxapp.databinding.FragmentTransactionsBinding;
+import com.harman.taxapp.excel.CreateExcelStatement;
+import com.harman.taxapp.excel.SendExcelStatement;
 import com.harman.taxapp.ui.taxes.TaxesViewModel;
 import com.harman.taxapp.usersdata.Transaction;
 import com.harman.taxapp.usersdata.YearStatement;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 public class TransactionsFragment extends Fragment {
     private final String TAG = "OLGA";
@@ -40,6 +48,7 @@ public class TransactionsFragment extends Fragment {
     private String idUser;
     private String year;
     private SharedPreferences settings;
+    private File fileName;
 
     public TransactionsFragment() {
     }
@@ -110,7 +119,27 @@ public class TransactionsFragment extends Fragment {
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //!!!!!!
+                Log.d(TAG, "onClick: зашли в онклик");
+                transactionsViewModel.getTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transaction>>() {
+                    @Override
+                    public void onChanged(List<Transaction> transactions) {
+                        transactionsViewModel.getSumTaxes().observe(getViewLifecycleOwner(), new Observer<Double>() {
+                            @Override
+                            public void onChanged(Double sumTaxes) {
+                                Log.d(TAG, "onChanged: зашли в обсерв");
+                                try {
+                                    CreateExcelStatement excelStatement = new CreateExcelStatement(year, sumTaxes, transactions);
+                                    excelStatement.create();
+                                    fileName = excelStatement.getFileName();
+                                    Snackbar.make(rootView, "Отчет скачан.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    Snackbar.make(rootView, "Не удалось создать файл", BaseTransientBottomBar.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -118,7 +147,27 @@ public class TransactionsFragment extends Fragment {
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //!!!!!!
+                Log.d(TAG, "onClick: зашли в онклик");
+                transactionsViewModel.getTransactions().observe(getViewLifecycleOwner(), new Observer<List<Transaction>>() {
+                    @Override
+                    public void onChanged(List<Transaction> transactions) {
+                        transactionsViewModel.getSumTaxes().observe(getViewLifecycleOwner(), new Observer<Double>() {
+                            @Override
+                            public void onChanged(Double sumTaxes) {
+                                Log.d(TAG, "onChanged: зашли в обсерв");
+                                    SendExcelStatement sendExcelStatement = new SendExcelStatement(rootView.getContext(), "bulina.nn@gmail.com", year, sumTaxes, transactions);
+                                try {
+                                    sendExcelStatement.send();
+                                    Snackbar.make(rootView, "Отчет отправлен на email.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                                } catch (InterruptedException exception) {
+                                    Snackbar.make(rootView, "Не удалось отправить отчет!", BaseTransientBottomBar.LENGTH_SHORT).show();
+                                }
+
+
+                            }
+                        });
+                    }
+                });
             }
         });
 

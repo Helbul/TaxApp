@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/transactionDetailsFragment"
         android:name="com.harman.taxapp.ui.detailtransaction.TransactionDetailsFragment"
-        android:label="@"
+        android:label="@string/menu_transaction_detail"
         tools:layout="@layout/fragment_transaction_details">
         <action
             android:id="@+id/action_transactionDetailsFragment_to_transactionsFragment"
